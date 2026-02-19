@@ -636,14 +636,16 @@ footer {
     align-items: center;
 }
 .logout-btn {
-    margin-right: -80px;
+    margin-right: -10px;
 }
 
-/* I removed this -Gino
+
+
+
 .brand { 
-    margin-left: -98px;
+    margin-left: -20px;
 }
-*/
+
 .admin-right {
     display: flex;
     align-items: center;
@@ -807,4 +809,5 @@ footer {
     margin: 0 auto;
     padding: 0;
     }
+
 
