@@ -55,7 +55,7 @@ include 'header.php';
             <input type="checkbox" id="terms" name="terms" required>
             <span>
                 By submitting this form, you confirm that you agree to the storing and processing of your personal data by CNSS Tech as described in the
-                <a href="privacy_policy.php">Privacy Policy</a>.
+                <a href="privacy-policy.php">Privacy Policy</a>.
             </span>
             </label>
         </div>
