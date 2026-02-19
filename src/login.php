@@ -1,4 +1,10 @@
-<?php include 'header.php'; ?>
+<!-- I modified this to let this page use only style_login.css file - Gino-->
+
+<?php
+$page_css = "css/style_login.css";
+include 'header.php';
+?>
+<!-- 0000000000000000000000000000000000000000000-->
 
 <div class="container login-page">
 

@@ -1,15 +1,15 @@
 <?php
-$host = "db";  
-$port = 3306;                     
-$user = "root";
-$pass = "password";
-$dbname = "Users";
+$servername = "db"; // Replace with your MySQL server hostname
+$username = "admin";     // Replace with your MySQL username
+$password = "Password123";     // Replace with your MySQL password
+$dbname = "cnsstech_db";       // Replace with the name of your MySQL database
 
-$conn = new mysqli($host, $user, $pass, $dbname, $port);
+// Create a database connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
-    die("Connection failed");
+    die("Connection failed: " . $conn->connect_error);
 }
-
 
 

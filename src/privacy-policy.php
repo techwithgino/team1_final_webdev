@@ -1,4 +1,9 @@
-<?php include 'header.php'; ?>
+<!-- I modified this to let this page use only style_index.css file - Gino-->
+<?php
+$page_css = "css/style_index.css";
+include 'header.php';
+?>
+<!-- 0000000000000000000000000000000000000000000-->
 
 <div class="container" style="padding: 3rem 1.5rem; max-width: 900px;">
     <a href="contactus.php" class="btn-back">Back to Contact Us</a>

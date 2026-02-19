@@ -1,267 +1,898 @@
- /* =========================
-    Base / Layout
-    ========================= */
-    * { box-sizing: border-box; }
-
-    html, body { height: 100%; }
-
-    body{
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #003135;
-    line-height: 1.6;
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #003135;
+        line-height: 1.6;
     }
 
-    .page-container{
-    min-height: 100vh;
+    header {
+        background: #00887A;
+        color: #ffffff;
+        padding: 1rem 0.5rem;
+    }
+    
+    header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.75rem; /* I added this line -Gino */
+    }
+
+    .logo-blend {
+        height: 70px;
+        mix-blend-mode: multiply;
+        opacity: 0.9;
+        filter: contrast(1.05);
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .brand-name {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #003135;
+        line-height: 1;
+    }
+
+    .brand-text {
     display: flex;
     flex-direction: column;
+    line-height: 1.1;
     }
 
-    .container{
+    .brand-tagline {
+        font-size: 0.9rem;
+        color: #003135;
+        margin-top: 0.2rem;
+    }
+
+    .navigation a {
+        color: #ffffff;
+        margin-left: 1rem;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .navigation a:hover {
+        text-decoration: underline;
+    }
+
+    .hero {
+        background: url("../images/9_img.jpg") center/cover no-repeat;
+        color: #ffffff;
+        padding: 5rem 1.5rem;
+        text-align: center;
+    }
+
+    .hero h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero p {
+        max-width: 700px;
+        margin: 0 auto 2rem auto;
+        font-size: 1.1rem;
+    }
+
+    .btn {
+        background: #00887A;
+        color: #ffffff;
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background: #024950;
+    }
+
+    /* I removed this - Gino
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+        */
+
+    /* I added this part -Gino */
+
+        .container{
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 1rem;
     }
 
-    /* =========================
-    Header (same as style.css)
-    ========================= */
-    header{
-    background: #00887A;
-    color: #ffffff;
-    padding: 1rem 0.5rem;
+
+    section {
+        padding: 3rem 1.5rem;
     }
 
-    header .container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    #services {
+        padding-bottom: 6rem;
     }
 
-    .brand{
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
     }
 
-    .logo-blend{
-    height: 70px;
-    mix-blend-mode: multiply;
-    opacity: 0.9;
-    filter: contrast(1.05);
+    .service-box {
+        background: #f8fafc;
+        padding: 2rem;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
 
-    .brand-text{
+    .service-box h3 {
+        margin-top: 0;
+        color: #00887A;
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    .service-box p {
+        flex-grow: 1;
+        min-height: 90px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .service-btn {
+        margin-top: auto;
+        background: #00887A;
+        color: #ffffff;
+        padding: 0.6rem 1.6rem;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.9rem;
+        border-radius: 9999px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .service-btn:hover {
+        background: #024950;
+    }
+
+    .about {
+        background: #f1f5f9;
+    }
+
+    .solutions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .solution-box {
+        background: #f8fafc;
+        padding: 2rem;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .solution-box h3 {
+        margin-top: 0;
+        color: #0f766e;
+    }
+
+    .solution-box img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+
+    footer {
+        background: #0f172a;
+        color: #ffffff;
+        padding: 0.5rem 1.5rem;
+        text-align: center;
+        font-size: 0.95rem;
+    }
+
+    footer p {
+        margin: 0.05rem 0;
+    }
+
+    .language button {
+        background: transparent;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        padding: 0.3rem 0.6rem;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .language button.active,
+    .language button:hover {
+        background: #ffffff;
+        color: #00887A;
+    }
+
+    /* Contact Section Button */
+    #contact .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 4px;
+        background: #00887A; /* Matches hero button */
+        color: #ffffff;
+        transition: background 0.3s ease;
+    }
+
+    #contact .btn:hover {
+        background: #024950; /* Matches hero button hover */
+    }
+
+    /* Optional: Center the button */
+    #contact .btn-container {
+        text-align: center;
+    }
+
+        .contact-page {
+    background: #ffffff;
+    padding: 3.5rem 1.5rem 4rem;
+    }
+
+    .contact-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    }
+
+    /* Offices (top block) */
+    .offices-block {
+    margin-bottom: 3rem;
+    }
+
+    .offices-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    gap: 2.5rem 3rem;
+    }
+
+    .office-card h4 {
+    margin: 0 0 0.65rem 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111827;
+    }
+
+    .office-card p {
+    margin: 0.15rem 0;
+    color: #6b7280;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    }
+
+    /* Title */
+    .contact-title {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #111827;
+    }
+
+    /* Form layout */
+    .contact-form {
+    margin-top: 0.5rem;
+    }
+
+    .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.25rem 3rem;
+    align-items: start;
+    }
+
+    .form-col {
     display: flex;
     flex-direction: column;
-    line-height: 1.1;
+    gap: 1.25rem;
     }
 
-    .brand-name{
-    font-family: "Times New Roman", Times, serif;
-    font-size: 2.5rem;
-    font-weight: bold;
+    /* Flat fields like screenshot */
+    .field label {
+    display: block;
+    font-size: 0.82rem;
     color: #003135;
-    line-height: 1;
+    margin: 0 0 0.55rem 0;
+    letter-spacing: 0.02em;
     }
 
-    .brand-tagline{
+    .req {
+    color: #e11d48; /* small red star */
+    font-weight: 700;
+    }
+
+    .flat-input,
+    .flat-textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: #f3f4f6;   /* slightly lighter */
+    border-radius: 2px;
+    padding: 0.65rem 0.85rem;   /* reduced padding */
+    font-size: 0.9rem;          /* slightly smaller text */
+    color: #111827;
+    }
+
+    .flat-input {
+    height: 40px;   /* was 50px */
+    }
+
+    .flat-textarea {
+    min-height: 50px;   /* reduced height */
+    padding: 0.65rem 0.85rem;
     font-size: 0.9rem;
-    color: #003135;
-    margin-top: 0.2rem;
+    resize: vertical;
     }
 
-    .navigation a{
+    /* Focus state (subtle) */
+    .flat-input:focus,
+    .flat-textarea:focus {
+    box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.08);
+    }
+
+    /* Consent row */
+    .consent-row {
+    margin-top: 1.8rem;
+    }
+
+    .checkbox-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #6b7280;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    user-select: none;
+    }
+
+    .checkbox-line input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: 18px;
+    height: 18px;
+    }
+
+    /* Submit button (pill red) */
+    .actions-row {
+    margin-top: 1.5rem;
+    }
+
+    .btn-pill {
+    border: none;
+    cursor: pointer;
+    background: #00887A;
     color: #ffffff;
-    margin-left: 1rem;
-    text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
+    padding: 0.9rem 1.6rem;
+    border-radius: 9999px;
     }
-    .navigation a:hover{ text-decoration: underline; }
 
-    .header-right{
+    .btn-pill:hover {
+    filter: brightness(0.95);
+    }
+
+    /* Fine print */
+    .fineprint {
+    margin-top: 1.5rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    }
+
+    .fineprint a {
+    color: #00887A;
+    text-decoration: none;
+    }
+
+    .fineprint a:hover {
+    text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+    .offices-grid {
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+    }
+    }
+
+    @media (max-width: 860px) {
+    .offices-grid {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    }
+
+    @media (max-width: 520px) {
+    .offices-grid {
+        grid-template-columns: 1fr;
+    }
+    }
+
+        .offices-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 2rem;
+    }
+
+    #contact .contact-link {
+    margin-top: 1.5rem;
+    }
+
+    #contact .contact-link a {
+        font-weight: normal;   /* remove bold */
+        font-size: 1.05rem;
+        color: #00887A;
+        text-decoration: underline;
+    }
+
+    #contact .contact-link a:hover {
+        opacity: 0.8;
+    }
+
+    .login-page {
+    min-height: calc(83vh - 140px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1.5rem;
+    background: #f1f5f9; /* matches your about section background */
+    }
+
+    .login-card {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 2.5rem 2rem;   /* equal horizontal padding */
+    box-sizing: border-box; /* important */
+    }
+
+    .login-title {
+    margin: 0 0 0.25rem 0;
+    color: #111827;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    }
+
+    .login-subtitle {
+    margin: 0 0 1.5rem 0;
+    color: #6b7280;
+    font-size: 0.95rem;
+    text-align: center;
+    }
+
+    .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+    }
+
+    .login-field label {
+    display: block;
+    font-size: 0.82rem;
+    color: #6b7280;
+    margin-bottom: 0.45rem;
+    }
+    .login-field input {
+    width: 100%;
+    box-sizing: border-box;  /* FIXES uneven width */
+    border: none;
+    outline: none;
+    background: #f3f4f6;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    color: #111827;
+    }
+
+    .login-field input:focus {
+    box-shadow: 0 0 0 2px rgba(0, 136, 122, 0.18); /* CNSS green focus */
+    }
+
+    .login-btn {
+    margin-top: 0.25rem;
+    border: none;
+    cursor: pointer;
+    background: #00887A; /* CNSS green */
+    color: #ffffff;
+    font-weight: 700;
+    padding: 0.85rem 1rem;
+    border-radius: 9999px;
+    }
+
+    .login-btn:hover {
+    background: #024950;
+    }
+
+    .login-help {
+    margin-top: 1.2rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+    }
+
+    .login-help a {
+    color: #00887A;
+    text-decoration: underline;
+    }
+
+    .signin-wrapper {
+        margin-left: 0;
+        position: relative;
+    }
+
+    .signin-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        text-decoration: none;
+        position: relative;
+    }
+
+    .signin-icon {
+        width: 26px;
+        height: 26px;
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .signin-link:hover .signin-icon {
+        transform: scale(1.08);
+        color: #e0f7f4;
+    }
+
+    /* Tooltip */
+    .signin-text {
+        position: absolute;
+        bottom: -28px;
+        right: 0;
+        background: #024950;
+        color: #ffffff;
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+    }
+
+    .signin-link:hover .signin-text {
+        opacity: 1;
+    }
+
+    .header-right {
     display: flex;
     align-items: center;
     gap: 0.6rem;
     }
 
-    .signin-wrapper{ position: relative; }
-
-    .signin-link{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    text-decoration: none;
-    position: relative;
+    .login-layout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+        width: 100%;
+        max-width: 1100px;
     }
 
-    .signin-icon{
-    width: 26px;
-    height: 26px;
-    transition: transform 0.2s ease, color 0.2s ease;
+    .login-support {
+        max-width: 420px;
+        color: #111827;
     }
 
-    .signin-link:hover .signin-icon{
-    transform: scale(1.08);
-    color: #e0f7f4;
+    .login-support h3 {
+        margin-bottom: 1rem;
+        color: #003135;
+        font-size: 1.2rem;
     }
 
-    .signin-text{
-    position: absolute;
-    bottom: -28px;
-    right: 0;
-    background: #024950;
-    color: #ffffff;
-    font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
+    .login-support p {
+        margin-bottom: 1.2rem;
+        line-height: 1.7;
+        color: #4b5563;
     }
 
-    .signin-link:hover .signin-text{ opacity: 1; }
+    /* Responsive */
+    @media (max-width: 900px) {
+        .login-layout {
+            flex-direction: column;
+            gap: 2.5rem;
+        }
 
-    .language button{
-    background: transparent;
-    border: 1px solid #ffffff;
-    color: #ffffff;
-    padding: 0.3rem 0.6rem;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 3px;
+        .login-support {
+            text-align: center;
+        }
     }
-    .language button.active,
-    .language button:hover{
-    background: #ffffff;
+
+    /* ============================= */
+    /* CaseMgmtPortal ONLY styles    */
+    /* ============================= */
+
+    /* Create real spacing between strips */
+    #portal-actions {
+        padding-top: 1.25rem; /* gives breathing room at top of portal page */
+    }
+
+    /* SEARCH STRIP (one-line rectangle) */
+    .search-strip {
+        background: #f8fafc;
+        padding: 1rem 1.25rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        margin-bottom: 2rem; /* ✅ visible gap below search */
+    }
+
+    .search-form {
+        display: grid;
+        grid-template-columns: auto 220px 1fr auto;
+        gap: 1rem;
+        align-items: center;
+        width: 100%;
+    }
+
+    .search-group {
+        display: contents; /* allows label + select to fit into grid cleanly */
+    }
+
+    .search-form label {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #003135;
+        white-space: nowrap;
+    }
+
+    .search-form select,
+    .search-form input {
+        border: none;
+        outline: none;
+        background: #f3f4f6;
+        border-radius: 8px;
+        padding: 0.65rem 0.9rem;
+        font-size: 0.95rem;
+        color: #111827;
+        box-sizing: border-box;
+    }
+
+    .search-form button {
+        border: none;
+        cursor: pointer;
+        background: #00887A;
+        color: #ffffff;
+        font-weight: 700;
+        padding: 0.65rem 1.6rem;
+        border-radius: 9999px;
+    }
+
+    .search-form button:hover {
+        background: #024950;
+    }
+
+    /* ACTION STRIPS */
+    .action-strip {
+        background: #f8fafc;
+        padding: 1rem 1.25rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        margin-bottom: 2rem; /* ✅ gap between each form */
+    }
+
+    /* Make the form stretch the full width */
+    .action-form-vertical {
+        width: 100%;
+        display: grid;
+        grid-template-rows: auto auto auto;
+        gap: 1rem;
+    }
+
+    /* Top row aligned perfectly with textarea width using GRID */
+    .action-row {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 160px 1fr 1fr 1fr; /* label + 3 equal fields */
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .action-row strong {
+        font-size: 0.95rem;
+        color: #003135;
+        white-space: nowrap;
+    }
+
+    /* Inputs in the row */
+    .action-row input {
+        border: none;
+        outline: none;
+        background: #f3f4f6;
+        border-radius: 8px;
+        padding: 0.6rem 0.9rem;
+        font-size: 0.95rem;
+        color: #111827;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    /* Message box matches the exact strip width */
+    .action-form-vertical textarea {
+        width: 100%;
+        min-height: 140px;
+        resize: vertical;
+        border: none;
+        outline: none;
+        background: #f3f4f6;
+        border-radius: 10px;
+        padding: 1rem;
+        font-size: 0.95rem;
+        color: #111827;
+        box-sizing: border-box;
+    }
+
+    /* Counter (left) + Button (right) BELOW textarea */
+    .action-bottom {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .char-count {
+        font-size: 0.85rem;
+        color: #6b7280;
+    }
+
+    /* Right-aligned submit/send button */
+    .action-btn {
+        border: none;
+        cursor: pointer;
+        background: #00887A;
+        color: #ffffff;
+        font-weight: 700;
+        padding: 0.7rem 1.8rem;
+        border-radius: 9999px;
+    }
+
+    .action-btn:hover {
+        background: #024950;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .search-form {
+            grid-template-columns: 1fr;
+        }
+
+        .action-row {
+            grid-template-columns: 1fr; /* stack label + inputs */
+        }
+
+        .action-bottom {
+            flex-direction: column;
+            align-items: flex-end; /* button right */
+        }
+
+        .char-count {
+            width: 100%;
+            text-align: right;
+        }
+    }
+
+        /* Bottom Sign Out Link */
+    .portal-signout {
+        text-align: center;
+        margin: 2.5rem 0 1.5rem;
+    }
+
+    .portal-signout a {
+        font-size: 0.95rem;
+        color: #003135;
+        text-decoration: underline;
+        font-weight: 500;
+        transition: opacity 0.2s ease;
+    }
+
+    .portal-signout a:hover {
+        opacity: 0.6;
+    }
+
+    .portal-hero {
+    background: url("../images/11_img.jpg") center/cover no-repeat;
+}
+
+    /* ========================= */
+    /* Terms & Conditions Modal */
+    /* ========================= */
+
+    .terms-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(3px);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .terms-content {
+        background: #ffffff;
+        width: 90%;
+        max-width: 800px;
+        max-height: 80vh;
+        border-radius: 12px;
+        padding: 2rem;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .terms-scroll {
+        overflow-y: auto;
+        margin-top: 1rem;
+        padding-right: 0.5rem;
+    }
+
+    .terms-close {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        font-size: 1.6rem;
+        cursor: pointer;
+        font-weight: bold;
+        color: #6b7280;
+    }
+
+    .terms-close:hover {
+        color: #000;
+    }
+
+    /* This is for register page - Gino */
+    .checkbox-row {
+    margin-top: 0.25rem;
+    }
+    .checkbox-row + .checkbox-row {
+    margin-top: 0.5rem;
+    }
+
+
+    .checkbox-line a {
     color: #00887A;
+    text-decoration: underline;
     }
-
-    /* =========================
-    Home Page Sections
-    ========================= */
-    .hero{
-    background: url("../images/9_img.jpg") center/cover no-repeat;
-    color: #ffffff;
-    padding: 5rem 1.5rem;
-    text-align: center;
+    .checkbox-line a:hover {
+    opacity: 0.85;
     }
-
-    .hero h2{
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    }
-
-    .hero p{
-    max-width: 700px;
-    margin: 0 auto 2rem auto;
-    font-size: 1.1rem;
-    }
-
-    .btn{
-    background: #00887A;
-    color: #ffffff;
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    }
-
-    .btn:hover{ background: #024950; }
-
-    section{ padding: 3rem 1.5rem; }
-
-    #services{ padding-bottom: 6rem; }
-
-    .services{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    }
-
-    .service-box{
-    background: #f8fafc;
-    padding: 2rem;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    }
-
-    .service-box h3{
-    margin-top: 0;
-    color: #00887A;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    }
-
-    .service-box p{
-    flex-grow: 1;
-    min-height: 90px;
-    display: flex;
-    align-items: flex-start;
-    }
-
-    .service-btn{
-    margin-top: auto;
-    background: #00887A;
-    color: #ffffff;
-    padding: 0.6rem 1.6rem;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-    border-radius: 9999px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    }
-
-    .service-btn:hover{ background: #024950; }
-
-    .about{ background: #f1f5f9; }
-
-    .solutions{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    }
-
-    .solution-box{
-    background: #f8fafc;
-    padding: 2rem;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .solution-box h3{
-    margin-top: 0;
-    color: #0f766e;
-    }
-
-    .solution-box img{
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    }
-
-    /* =========================
-    Footer (same as style.css)
-    ========================= */
-    footer{
-    margin-top: auto;
-    background: #0f172a;
-    color: #ffffff;
-    padding: 0.5rem 1.5rem;
-    text-align: center;
-    font-size: 0.95rem;
-    }
-    footer p{ margin: 0.05rem 0; }

@@ -1,4 +1,9 @@
-<?php include 'header.php'; ?>
+<!-- I modified this to let this page use only style_index.css file - Gino-->
+<?php
+$page_css = "css/style_index.css";
+include 'header.php';
+?>
+<!-- 0000000000000000000000000000000000000000000-->
 
 <section class="hero">
     <div class="container">
@@ -8,7 +13,7 @@
             to help businesses stay secure, connected, and efficient.
         </p>
         <a href="contactus.php" class="btn">Get in touch</a>
-        <a href="login.php" class="btn">Client Login</a>
+
     </div>
 </section>
 

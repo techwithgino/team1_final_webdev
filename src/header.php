@@ -7,17 +7,15 @@
     <title>CNSS Tech | IT Network and System Services</title>
     <meta name="description" content="CNSS Tech provides professional IT Network & System Services and IT Consultancy in Finland."/>
 
-    <?php
-    $currentPage = basename($_SERVER['PHP_SELF']);
 
-    $useIndexStylePages = ["index.php", "contactus.php"];
-    ?>
+<!-- I added this part here - Gino -->
 
-    <?php if (in_array($currentPage, $useIndexStylePages)): ?>
-        <link rel="stylesheet" href="css/style_index.css">
-    <?php else: ?>
-        <link rel="stylesheet" href="css/style.css">
-    <?php endif; ?>
+<?php if (isset($page_css) && $page_css !== ""): ?>
+    <link rel="stylesheet" href="<?php echo $page_css; ?>">
+<?php endif; ?>
+
+<!-- Ends here-->
+
 
     <link rel="icon" type="image/png" href="images/10_img_logo.PNG">
 </head>

@@ -1,4 +1,9 @@
-<?php include 'header.php'; ?>
+<!-- I modified this to let this page use only style_index.css file - Gino-->
+<?php
+$page_css = "css/style_index.css";
+include 'header.php';
+?>
+<!-- 0000000000000000000000000000000000000000000-->
 
 <main style="display: flex; justify-content: center; align-items: center; min-height: calc(87vh - 120px); padding: 1rem;">
     <div style="max-width: 800px; width: 100%;">

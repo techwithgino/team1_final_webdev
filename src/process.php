@@ -35,6 +35,7 @@ if (isset($_POST['submit'])) {
 
     if ($stmt->execute()) {
 
+        $page_css = "css/style_index.css";
         include 'header.php';
         ?>
 
