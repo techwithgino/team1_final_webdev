@@ -1,0 +1,267 @@
+ /* =========================
+    Base / Layout
+    ========================= */
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #003135;
+    line-height: 1.6;
+    }
+
+    .page-container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    }
+
+    .container{
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    }
+
+    /* =========================
+    Header (same as style.css)
+    ========================= */
+    header{
+    background: #00887A;
+    color: #ffffff;
+    padding: 1rem 0.5rem;
+    }
+
+    header .container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    }
+
+    .brand{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    }
+
+    .logo-blend{
+    height: 70px;
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+    filter: contrast(1.05);
+    }
+
+    .brand-text{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    }
+
+    .brand-name{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #003135;
+    line-height: 1;
+    }
+
+    .brand-tagline{
+    font-size: 0.9rem;
+    color: #003135;
+    margin-top: 0.2rem;
+    }
+
+    .navigation a{
+    color: #ffffff;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    }
+    .navigation a:hover{ text-decoration: underline; }
+
+    .header-right{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    }
+
+    .signin-wrapper{ position: relative; }
+
+    .signin-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    text-decoration: none;
+    position: relative;
+    }
+
+    .signin-icon{
+    width: 26px;
+    height: 26px;
+    transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .signin-link:hover .signin-icon{
+    transform: scale(1.08);
+    color: #e0f7f4;
+    }
+
+    .signin-text{
+    position: absolute;
+    bottom: -28px;
+    right: 0;
+    background: #024950;
+    color: #ffffff;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    }
+
+    .signin-link:hover .signin-text{ opacity: 1; }
+
+    .language button{
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    padding: 0.3rem 0.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 3px;
+    }
+    .language button.active,
+    .language button:hover{
+    background: #ffffff;
+    color: #00887A;
+    }
+
+    /* =========================
+    Home Page Sections
+    ========================= */
+    .hero{
+    background: url("../images/9_img.jpg") center/cover no-repeat;
+    color: #ffffff;
+    padding: 5rem 1.5rem;
+    text-align: center;
+    }
+
+    .hero h2{
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    }
+
+    .hero p{
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    font-size: 1.1rem;
+    }
+
+    .btn{
+    background: #00887A;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    }
+
+    .btn:hover{ background: #024950; }
+
+    section{ padding: 3rem 1.5rem; }
+
+    #services{ padding-bottom: 6rem; }
+
+    .services{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    }
+
+    .service-box{
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    }
+
+    .service-box h3{
+    margin-top: 0;
+    color: #00887A;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    }
+
+    .service-box p{
+    flex-grow: 1;
+    min-height: 90px;
+    display: flex;
+    align-items: flex-start;
+    }
+
+    .service-btn{
+    margin-top: auto;
+    background: #00887A;
+    color: #ffffff;
+    padding: 0.6rem 1.6rem;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .service-btn:hover{ background: #024950; }
+
+    .about{ background: #f1f5f9; }
+
+    .solutions{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    }
+
+    .solution-box{
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .solution-box h3{
+    margin-top: 0;
+    color: #0f766e;
+    }
+
+    .solution-box img{
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    }
+
+    /* =========================
+    Footer (same as style.css)
+    ========================= */
+    footer{
+    margin-top: auto;
+    background: #0f172a;
+    color: #ffffff;
+    padding: 0.5rem 1.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+    }
+    footer p{ margin: 0.05rem 0; }
