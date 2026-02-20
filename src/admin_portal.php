@@ -1,20 +1,36 @@
 <?php
+// First thing: make sure the user is logged in.
+// This page should never be visible to someone who isn't authenticated.
 require 'auth_check.php';
+
+// Connect to the database so we can fetch users, cases, etc.
 require 'db_connect.php';
 
+// If the logged-in user is an admin, we load all the admin-only data.
+// Regular users shouldn't see any of this.
 if ($_SESSION['role'] === 'admin') {
+
+    // Get a list of all users so the admin can manage them.
     $users = $conn->query("SELECT id, company_id, username, role FROM users ORDER BY id ASC");
 
+    // Count how many users exist in total.
     $count_users = $conn->query("SELECT COUNT(*) AS c FROM users")->fetch_assoc()['c'];
+
+    // Count how many cases exist in total.
     $count_cases = $conn->query("SELECT COUNT(*) AS c FROM cases")->fetch_assoc()['c'];
+
+    // Count only the open cases.
     $count_open_cases = $conn->query("SELECT COUNT(*) AS c FROM cases WHERE status='open'")->fetch_assoc()['c'];
 }
 
+// Load the admin header (navigation bar, styles, etc.)
 include 'admin_header.php';
 ?>
 
+<!-- Main container for the dashboard layout -->
 <div style="width:100%; max-width:1600px; margin:0 auto; padding:0 40px; box-sizing:border-box;">
 
+    <!-- Big top banner with gradient background -->
     <div class="dashboard-box" 
          style="padding:2rem; border-radius:12px; margin-top:2rem;
                 background: linear-gradient(135deg, #00887A, #4CC7B4); color:white;">
@@ -22,19 +38,23 @@ include 'admin_header.php';
         <div style="display:flex; justify-content:space-between; align-items:flex-end; width:100%;">
 
             <div>
+                <!-- Title changes depending on the user's role -->
                 <h2 style="margin:0; font-size:2rem; font-weight:700;">
                     <?php echo ($_SESSION['role'] === 'admin') ? 'Admin Portal' : 'User Portal'; ?>
                 </h2>
 
+                <!-- Friendly welcome message -->
                 <div style="margin-top:0.3rem; font-size:1.1rem;">
                     Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!
                     (<?php echo ucfirst(htmlspecialchars($_SESSION['role'])); ?>)
                 </div>
             </div>
 
+            <!-- Admin sees admin tools; users see a simpler button -->
             <?php if ($_SESSION['role'] === 'admin'): ?>
             <div style="display:flex; gap:1rem; margin-bottom:-0.5rem;">
 
+                <!-- Link to case management -->
                 <a href="cases_list.php" 
                    style="background:white; color:#00887A; padding:0.85rem 1.5rem;
                           border-radius:12px; font-weight:600; text-decoration:none;
@@ -42,6 +62,7 @@ include 'admin_header.php';
                     Case Management
                 </a>
 
+                <!-- Link to submissions overview -->
                 <a href="submissions_list.php" 
                    style="background:white; color:#00887A; padding:0.85rem 1.5rem;
                           border-radius:12px; font-weight:600; text-decoration:none;
@@ -52,6 +73,7 @@ include 'admin_header.php';
             </div>
 
             <?php else: ?>
+            <!-- Regular users only get the case management button -->
             <div style="display:flex; gap:1rem; margin-bottom:-0.5rem;">
 
                 <a href="cases_list.php" 
@@ -68,8 +90,10 @@ include 'admin_header.php';
 
     </div>
 
+    <!-- ========================= ADMIN SECTION ========================= -->
     <?php if ($_SESSION['role'] === 'admin'): ?>
 
+    <!-- Admin can create new users here -->
     <div class="dashboard-box" style="width:100%; margin-top:2rem; padding:2rem; border-radius:12px;">
 
         <h3 style="margin-top:0; color:#00887A; font-weight:700;">Add New User</h3>
@@ -110,27 +134,33 @@ include 'admin_header.php';
         </form>
     </div>
 
+    <!-- Admin dashboard stats (users, cases, open cases) -->
     <div class="dashboard-box" style="width:100%; margin-top:2rem; padding:2rem; border-radius:12px;">
 
         <h3 style="margin-top:0; color:#00887A; font-weight:700;">Admin Tools</h3>
 
         <div style="display:flex; gap:2rem; margin-top:2rem;">
+
+            <!-- Total users -->
             <div style="flex:1; background:#f4f7f7; padding:1.5rem; border-radius:10px; text-align:center;">
                 <h4>Total Users</h4>
                 <p style="font-size:2rem; font-weight:700; color:#00887A;"><?php echo $count_users; ?></p>
             </div>
 
+            <!-- Total cases -->
             <div style="flex:1; background:#f4f7f7; padding:1.5rem; border-radius:10px; text-align:center;">
                 <h4>Total Cases</h4>
                 <p style="font-size:2rem; font-weight:700; color:#00887A;"><?php echo $count_cases; ?></p>
             </div>
 
+            <!-- Open cases -->
             <div style="flex:1; background:#f4f7f7; padding:1.5rem; border-radius:10px; text-align:center;">
                 <h4>Open Cases</h4>
                 <p style="font-size:2rem; font-weight:700; color:#00887A;"><?php echo $count_open_cases; ?></p>
             </div>
         </div>
 
+        <!-- Quick admin shortcuts -->
         <div style="display:flex; gap:1rem; margin-top:2rem;">
             <a href="cases_list.php" class="top-action-btn" style="flex:1; text-align:center;">Manage Cases</a>
             <a href="submissions_list.php" class="top-action-btn" style="flex:1; text-align:center;">View Submissions</a>
@@ -141,11 +171,14 @@ include 'admin_header.php';
 
     <?php endif; ?>
 
+    <!-- ========================= USER SECTION ========================= -->
     <?php if ($_SESSION['role'] !== 'admin'): ?>
 
+    <!-- Regular users get three submission forms -->
     <div class="dashboard-box" style="width:100%; margin-top:2rem; padding:2rem; border-radius:12px;">
         <div class="three-card-row">
 
+            <!-- Case submission -->
             <div class="portal-card">
                 <h3>Report a Case</h3>
                 <p>Submit a new case for follow-up and handling.</p>
@@ -156,6 +189,7 @@ include 'admin_header.php';
                 </form>
             </div>
 
+            <!-- Request submission -->
             <div class="portal-card">
                 <h3>Submit a Request</h3>
                 <p>Ask for changes, services, or specific actions.</p>
@@ -166,6 +200,7 @@ include 'admin_header.php';
                 </form>
             </div>
 
+            <!-- Inquiry submission -->
             <div class="portal-card">
                 <h3>Send an Inquiry</h3>
                 <p>For more information, you can send questions below: .</p>
@@ -181,11 +216,13 @@ include 'admin_header.php';
 
     <?php endif; ?>
 
+    <!-- ========================= ADMIN USER LIST ========================= -->
     <?php if ($_SESSION['role'] === 'admin'): ?>
 
     <div class="user-management" style="width:100%; margin-top:2rem; margin-bottom:2rem;">
         <h3>Current Users</h3>
 
+        <!-- Search bar for filtering users -->
         <input type="text" id="userSearch" placeholder="Search users..." class="admin-search-input" style="margin-bottom:1rem;">
 
         <table>
@@ -205,6 +242,8 @@ include 'admin_header.php';
                         <td><?php echo htmlspecialchars($u['company_id']); ?></td>
                         <td><?php echo htmlspecialchars($u['username']); ?></td>
                         <td><?php echo htmlspecialchars($u['role']); ?></td>
+
+                        <!-- Edit/Delete buttons -->
                         <td class="action-buttons">
                             <button class="edit-btn" onclick="location.href='user_edit.php?id=<?php echo $u['id']; ?>'">Edit</button>
                             <button class="delete-btn" onclick="if(confirm('Delete this user?')) location.href='user_delete.php?id=<?php echo $u['id']; ?>'">Delete</button>
@@ -219,6 +258,7 @@ include 'admin_header.php';
 
 </div>
 
+<!-- Simple JS search filter for the user table -->
 <script>
 document.getElementById('userSearch')?.addEventListener('input', function() {
     const filter = this.value.toLowerCase();
@@ -231,6 +271,7 @@ document.getElementById('userSearch')?.addEventListener('input', function() {
 </script>
 
 <?php include 'admin_footer.php'; ?>
+
 
 
 
