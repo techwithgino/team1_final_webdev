@@ -1,21 +1,33 @@
 <?php
+
 require 'auth_check.php';
+
 require 'db_connect.php';
 
+// quick check is this person an admin
 $isAdmin = ($_SESSION['role'] === 'admin');
 
-
+// if admin, they get the full overview + stats
 if ($isAdmin) {
+
+    // total number of cases in the system
     $total = $conn->query("SELECT COUNT(*) AS c FROM cases")->fetch_assoc()['c'];
+
+    // how many are open
     $open = $conn->query("SELECT COUNT(*) AS c FROM cases WHERE status='Open'")->fetch_assoc()['c'];
+
+    // how many are in progress
     $progress = $conn->query("SELECT COUNT(*) AS c FROM cases WHERE status='In Progress'")->fetch_assoc()['c'];
+
+    // how many are closed
     $closed = $conn->query("SELECT COUNT(*) AS c FROM cases WHERE status='Closed'")->fetch_assoc()['c'];
 
+    // admins see ALL cases, newest first
     $query = "SELECT * FROM cases ORDER BY created_at DESC";
     $result = $conn->query($query);
 
-
 } else {
+    // non-admins only see their own cases
     $query = "SELECT * FROM cases WHERE created_by = ? ORDER BY created_at DESC";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $_SESSION['user_id']);
@@ -26,45 +38,51 @@ if ($isAdmin) {
 
 <?php include 'admin_header.php'; ?>
 
+<!-- main container for the page -->
 <div style="width:100%; max-width:1400px; margin:0 auto; padding:0 40px; box-sizing:border-box;">
 
     <div class="dashboard-box" style="margin-top:2rem;">
 
-        
+        <!-- page title changes depending on role -->
         <h2 style="margin:0; font-size:2rem; font-weight:700; color:#003135;">
             <?php echo $isAdmin ? "Case Management" : "My Cases"; ?>
         </h2>
 
+        <!--  welcome message thing -->
         <p style="margin-top:0.3rem; color:#003135;">
             Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>
         </p>
 
-        
+        <!-- button to add a new case -->
         <a href="case_add.php" 
            style="background:#00887A; color:white; padding:0.8rem 1.4rem; border-radius:10px; 
                   display:inline-block; margin-top:1rem; font-weight:600; text-decoration:none;">
             + Add New Case
         </a>
 
-        
+        <!-- admin-only stats section -->
         <?php if ($isAdmin): ?>
         <div style="display:flex; gap:1.5rem; margin-top:1.5rem;">
 
+            <!-- total cases -->
             <div style="flex:1; background:#f4f7f7; padding:1.5rem; border-radius:12px; text-align:center;">
                 <h3 style="margin:0; font-size:2rem; color:#00887A;"><?php echo $total; ?></h3>
                 <p style="margin:0; color:#003135;">Total Cases</p>
             </div>
 
+            <!-- open cases -->
             <div style="flex:1; background:#f4f7f7; padding:1.5rem; border-radius:12px; text-align:center;">
                 <h3 style="margin:0; font-size:2rem; color:#00887A;"><?php echo $open; ?></h3>
                 <p style="margin:0; color:#003135;">Open</p>
             </div>
 
+            <!-- in progress -->
             <div style="flex:1; background:#f4f7f7; padding:1.5rem; border-radius:12px; text-align:center;">
                 <h3 style="margin:0; font-size:2rem; color:#00887A;"><?php echo $progress; ?></h3>
                 <p style="margin:0; color:#003135;">In Progress</p>
             </div>
 
+            <!-- closed -->
             <div style="flex:1; background:#f4f7f7; padding:1.5rem; border-radius:12px; text-align:center;">
                 <h3 style="margin:0; font-size:2rem; color:#00887A;"><?php echo $closed; ?></h3>
                 <p style="margin:0; color:#003135;">Closed</p>
@@ -72,9 +90,11 @@ if ($isAdmin) {
 
         </div>
 
-       
+        <!-- chart area -->
         <div class="dashboard-box" style="margin-top:1.5rem; text-align:center;">
             <h3 style="margin-top:0; color:#003135;">Case Status Overview</h3>
+
+            <!-- chart.js pulls its data from these data-* attributes -->
             <canvas 
                 id="caseChart"
                 data-open="<?php echo $open; ?>"
@@ -85,13 +105,13 @@ if ($isAdmin) {
         </div>
         <?php endif; ?>
 
-        
+        <!-- search bar for filtering cases -->
         <input type="text" id="searchInput" placeholder="Search cases..." 
                style="width:100%; padding:1rem; margin-top:1.5rem; border:1px solid #cfd8dc; 
                       border-radius:10px; box-sizing:border-box;">
     </div>
 
-    
+    <!-- table of cases -->
     <div class="dashboard-box" style="margin-top:2rem;">
         <h3 style="margin-top:0; color:#003135;">
             <?php echo $isAdmin ? "All Cases" : "Your Cases"; ?>
@@ -113,6 +133,7 @@ if ($isAdmin) {
                     <?php while ($case = $result->fetch_assoc()): ?>
 
                         <?php
+                        // pick a CSS class based on the case status
                         $status = $case['status'];
                         $class = '';
 
@@ -124,18 +145,21 @@ if ($isAdmin) {
                         <tr>
                             <td style="padding:0.8rem;"><?php echo $case['id']; ?></td>
                             <td style="padding:0.8rem;"><?php echo htmlspecialchars($case['title']); ?></td>
+
+                            <!-- status badge -->
                             <td style="padding:0.8rem;">
                                 <span class="status-badge <?php echo $class; ?>" 
                                       style="padding:0.3rem 0.6rem; border-radius:8px; font-weight:600;">
                                     <?php echo htmlspecialchars($status); ?>
                                 </span>
                             </td>
+
                             <td style="padding:0.8rem;"><?php echo $case['created_at']; ?></td>
 
                             <td style="padding:0.8rem;">
                                 <div class="action-buttons">
 
-                                    
+                                    <!-- edit button: admins OR the creator can edit -->
                                     <?php if ($isAdmin || $case['created_by'] == $_SESSION['user_id']): ?>
                                         <button class="edit-btn"
                                                 onclick="location.href='case_edit.php?id=<?php echo $case['id']; ?>'">
@@ -143,7 +167,7 @@ if ($isAdmin) {
                                         </button>
                                     <?php endif; ?>
 
-                                   
+                                    <!-- delete button: admins only -->
                                     <?php if ($isAdmin): ?>
                                         <button class="delete-btn"
                                                 onclick="location.href='case_delete.php?id=<?php echo $case['id']; ?>'">
@@ -157,6 +181,7 @@ if ($isAdmin) {
 
                     <?php endwhile; ?>
                 <?php else: ?>
+                    <!-- no cases found -->
                     <tr>
                         <td colspan="5" style="padding:0.8rem;">No cases found.</td>
                     </tr>
@@ -169,8 +194,10 @@ if ($isAdmin) {
 
 <?php include 'admin_footer.php'; ?>
 
+<!-- chart.js + your custom JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/cases.js?v=3"></script>
+
 
 
 
