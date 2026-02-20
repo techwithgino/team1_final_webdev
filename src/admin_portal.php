@@ -1,25 +1,25 @@
 <?php
-// First thing: make sure the user is logged in.
-// This page should never be visible to someone who isn't authenticated.
+// first thing: make sure the user is logged in.
+// this page should never be visible to someone who isn't authenticated.
 require 'auth_check.php';
 
-// Connect to the database so we can fetch users, cases, etc.
+// Connect to the database so we can fetch users, cases, etc
 require 'db_connect.php';
 
-// If the logged-in user is an admin, we load all the admin-only data.
-// Regular users shouldn't see any of this.
+// f the logged-in user is an admin, we load all the admin-only data, regular users cant see it
+
 if ($_SESSION['role'] === 'admin') {
 
-    // Get a list of all users so the admin can manage them.
+    // Get a list of all users so the admin can manage them
     $users = $conn->query("SELECT id, company_id, username, role FROM users ORDER BY id ASC");
 
-    // Count how many users exist in total.
+    // count how many users exist in total
     $count_users = $conn->query("SELECT COUNT(*) AS c FROM users")->fetch_assoc()['c'];
 
-    // Count how many cases exist in total.
+    // count how many cases exist in total
     $count_cases = $conn->query("SELECT COUNT(*) AS c FROM cases")->fetch_assoc()['c'];
 
-    // Count only the open cases.
+    // Count only the open cases
     $count_open_cases = $conn->query("SELECT COUNT(*) AS c FROM cases WHERE status='open'")->fetch_assoc()['c'];
 }
 
